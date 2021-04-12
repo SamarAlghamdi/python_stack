@@ -18,7 +18,7 @@ class BankAccount:
 
     def display_account_info(self):
         # your code here
-        print(f"Balance: $"{self.balance}")
+        print(f"Balance: ${self.balance}")
         return self
 
     def yield_interest(self):
@@ -26,11 +26,11 @@ class BankAccount:
         interst = self.int_rate * self.balance
         print(f"The yield interest is {interst}")
         return self
-acount1 = BankAccount()
-acount2 = BankAccount(balance=2000)
+# acount1 = BankAccount()
+# acount2 = BankAccount(balance=2000)
 
-acount1.deposit(200).deposit(500).deposit(100).withdraw(250).yield_interest().display_account_info()
-acount2.deposit(3000).deposit(200).withdraw(100).withdraw(50).withdraw(150).withdraw(100).yield_interest().display_account_info()
+# acount1.deposit(200).deposit(500).deposit(100).withdraw(250).yield_interest().display_account_info()
+# acount2.deposit(3000).deposit(200).withdraw(100).withdraw(50).withdraw(150).withdraw(100).yield_interest().display_account_info()
 
 
     
