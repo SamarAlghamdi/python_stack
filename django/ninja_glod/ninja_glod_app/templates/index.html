@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'style.css'%}" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- First form -->
+    <div class="form-container">
+      <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <h3>Farm</h3>
+        <p>(earns 10-20 golds)</p>
+        <button type="submit" name="farm">Find Gold</button>
+      </form>
+      <!-- Second Form -->
+      <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <h3>Cave</h3>
+        <p>(earns 5-10 golds)</p>
+        <button type="submit" name="cave">Find Gold</button>
+      </form>
+      <!-- House -->
+      <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <h3>House</h3>
+        <p>(earns 2-5 golds)</p>
+        <button type="submit" name="house">Find Gold</button>
+      </form>
+      <!-- Casion -->
+      <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <h3>Casino</h3>
+        <p>(earns/ takes 0-50 glod)</p>
+        <button type="submit" name="casino">Find Gold</button>
+      </form>
+    </div>
+    <h2>Activity</h2>
+    <div class="activte">
+      <ul>
+        {%for gold in request.session.gold%}
+        <li class="{{gold.color}}">{{gold.value}}</li>
+        {%endfor%}
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+.card a {
+  text-decoration: none;
+  color: none;
+}
+.card-body {
+  height: 140px;
+}
+h3 {
+  color: black;
+}
+

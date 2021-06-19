@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static%}
+{% load humanize %}
+{% block content %}
+<div class="row">
+    <h2 class="text-center mt-4">My Posts</h2>
+    <hr />
+    {%for post in posts%}
+    <div class="col-md-4 my-3">
+      <div class="card">
+        <a href="/post/{{post.id}}">
+          <img class="card-img-top" src="{{post.image.url}}" />
+          <div class="card-body">
+            <h3 class="card-title">{{post.title}} <small class="text-primary" style="font-size: 17px">({{post.category.name}})</small></h3>
+            <p class="card-text text-muted">{{post.description}}</p>
+          </div>
+        </a>
+        <div class="card-footer bg-white">
+          <div class="row">
+            <div class="col-sm-2">
+              <a href="/porfile">
+                <img src="{{post.created_by.profile.image.url}}" class="profile" />
+              </a>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted">{{post.created_by.username}}</p>
+              <p class="text-muted date">{{post.created_at|naturaltime}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+{% endblock %}

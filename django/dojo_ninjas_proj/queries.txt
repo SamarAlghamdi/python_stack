@@ -1,0 +1,55 @@
+>>> Dojos.objects.create(name="dojo1" ,city="Florence",state="AL")
+<Dojos: Dojos object (1)>
+>>> Dojos.objects.create(name="dojo2" ,city="Orlando", state="FL")
+<Dojos: Dojos object (2)>
+>>> Dojos.objects.create(name="dojo3" ,city="phily",state="PA")
+<Dojos: Dojos object (3)>
+
+>>> dojo1=Dojos.objects.get(id=1)
+>>> dojo1.delete()
+>>> dojo2=Dojos.objects.get(id=2)
+>>> dojo2.delete()
+>>> dojo3=Dojos.objects.get(id=3)
+>>> dojo3.delete()
+
+>>> Dojos.objects.create(name="dojo1" ,city="Florence",state="AL")
+<Dojos: Dojos object (1)>
+>>> Dojos.objects.create(name="dojo2" ,city="Orlando", state="FL")
+<Dojos: Dojos object (2)>
+>>> Dojos.objects.create(name="dojo4" , city="Phily" , state="PA")
+<Dojos: Dojos object (4)>
+
+
+>>> Ninjas.objects.create(dojo_id=Dojos.objects.get(id=1),first_name="Samar",last_name="Alghamdi")
+<Ninjas: Ninjas object (1)>
+>>> Ninjas.objects.create(dojo_id=Dojos.objects.get(id=1),first_name="Mai",last_name="Alghamdi")
+<Ninjas: Ninjas object (2)>
+>>> Ninjas.objects.create(dojo_id=Dojos.objects.get(id=1),first_name="Faris",last_name="Alghamdi")
+<Ninjas: Ninjas object (3)>
+
+>>> Ninjas.objects.create(dojo_id=Dojos.objects.get(id=2),first_name="Nora",last_name="Panckies")
+<Ninjas: Ninjas object (4)>
+>>> Ninjas.objects.create(dojo_id=Dojos.objects.get(id=2),first_name="Ron",last_name="Panckies")
+<Ninjas: Ninjas object (5)>
+>>> Ninjas.objects.create(dojo_id=Dojos.objects.get(id=2),first_name="Nar",last_name="Panckies")
+<Ninjas: Ninjas object (6)>
+
+>>> Ninjas.objects.create(dojo_id=Dojos.objects.get(id=4),first_name="Faisal", last_name="Wafels")
+<Ninjas: Ninjas object (7)>
+>>> Ninjas.objects.create(dojo_id=Dojos.objects.get(id=4),first_name="Khaled", last_name="Wafels")
+<Ninjas: Ninjas object (8)>
+>>> Ninjas.objects.create(dojo_id=Dojos.objects.get(id=4),first_name="Ahmad", last_name="Wafels")
+<Ninjas: Ninjas object (9)>
+
+>>> Ninjas.objects.filter(dojo_id=Dojos.objects.get(id=1))
+
+>>> Ninjas.objects.filter(dojo_id=Dojos.objects.last())
+
+>>> Dojos.objects.last()
+<Dojos: Dojos object (4)>
+
+
+
+
+>>> Dojos.objects.create(name="dojo5",city="MS" ,state="AL", desc="new dojo")
+<Dojos: Dojos object (5)>

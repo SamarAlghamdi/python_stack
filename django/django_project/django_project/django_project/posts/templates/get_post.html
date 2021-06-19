@@ -1,0 +1,99 @@
+{%extends 'base.html'%}{%load static%}{% load markdown_extras %} {% load humanize %} {%block content %}
+
+<div class="p-4 p-md-5 mb-4 text-white rounded hero" style="background-image:url('{{post.image.url}}')">
+  <div class="col-md-12 px-0">
+    <h1 class="display-4 fst-italic">{{post.title}}</h1>
+    </h1>
+    <p class="lead my-3">{{post.description}}</p>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between poster_info">
+  <div class="col-md-4 ">
+    <div class="row card-body bg-white ">
+      <div class="col-md-3">
+        <a href="/porfile">
+          <img src="{{post.created_by.profile.image.url}}" class="profile" />
+        </a>
+      </div>
+      <div class="col-sm-8">
+        <p class="text-muted">{{post.created_by.username}}</p>
+        <p class="text-muted date">{{post.created_at}}</p>
+        <a target='_blank' href="{{post.created_by.profile.twitter}}"><i class="fab fa-twitter text-muted"></i></a>
+        <a target='_blank' href="{{post.created_by.profile.linkedin}}"><i class="fab fa-linkedin text-muted"></i></a>
+        <a target='_blank' href="{{post.created_by.profile.instagram}}"><i class="fab fa-instagram text-muted"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 d-flex flex-row-reverse align-items-center justify-content-start">
+    {% if user in post.users_who_fav.all%}
+    <a href="/post/{{post.id}}/unfav"><i class="fas fa-bookmark text-muted"></i></a>
+    {% else %}
+    <a href="/post/{{post.id}}/fav"><i class="far fa-bookmark text-muted"></i></a>
+    {% endif %}
+
+    {% if user in post.users_who_like.all%}
+    <a href="/post/{{post.id}}/unlike"><i class="fas fa-heart text-danger"></i></a><span style="margin:20px 5px 22px 0px;">{{post.like_count}}</span>
+    {% else%}
+    <a href="/post/{{post.id}}/like"><i class="far fa-heart text-muted"></i></a> <span style="margin:20px 5px 22px 0px;"> {{post.like_count}} </span>
+    {% endif%}
+
+  </div>
+</div>
+<hr />
+{% if post.created_by.id == user.id %}
+<div class=" d-flex flex-row-reverse align-items-center justify-content-start">
+  <a href="/post/{{post.id}}/edit"><i class="far fa-edit text-success"></i></a>
+  <a href="/post/{{post.id}}/delete"><i class="far fa-trash-alt text-danger"></i></a>
+  </div>
+    {%endif %}
+    
+<div class="content container-sm">
+  <h2>{{post.title}}</h2>
+  <h5 class="text-muted">{{post.description}}</h5>
+  <article>{{post.content|markdown|safe}}</article>
+<hr />
+
+<div class="comment_container">
+  {%if user.is_authenticated%}
+  <form action="/comment_form" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="post_id" value="{{post.id}}"/>
+  <div class="form-group">
+    <label for="comment">Add Comment:</label>
+    <textarea class="form-control" type="text" placeholder="Enter Your comment" name="comment"></textarea>
+    <button type="submit" class="btn btn-primary my-2">Comment</button>
+  </div>
+  </form>
+</div>
+
+  {% endif %}
+  {% for comment in post.comments.all %}
+  <article class="media content-section">
+    <div class="row">
+      <div class="col-md-1">
+    <img
+      class="rounded-circle article-img"
+      src="{{comment.created_by.profile.image.url}}"
+      alt=""
+    />
+  </div>
+  <div class="col-md-11">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="/user/{{comment.created_by.id}}/profile">{{comment.created_by.username}}</a>
+        <!-- https://docs.djangoproject.com/en/3.1/ref/templates/builtins/#date -->
+        <small class="text-muted">{{ comment.created_at|naturaltime}}</small>
+        {% if user.id == comment.created_by.id%}
+          <a href="/comment/{{comment.id}}/delete"><i class="far fa-trash-alt text-danger"></i></a>
+          {% endif %}
+      </div>
+    </div>
+    
+      <p class="article-content">{{comment.text}}</p>
+    </div>
+  </div>
+  </article>
+{% endfor %}
+
+{%endblock%}

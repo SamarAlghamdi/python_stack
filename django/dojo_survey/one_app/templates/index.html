@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey Index</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  
+</head>
+<body>
+    <form class="main" action="/result" method='post'>
+        {% csrf_token %}
+        <p>Your Name: <input type='text' name='name'></p> 
+
+        <label for="location">Dojo Location:</label>
+        <select class="list" name="location">
+            <option value="riyadh">Riyadh</option>
+            <option value="makkah">Makkah</option>
+            <option value="jeddah">Jeddah</option>
+            <option value="dammam">Dammam</option>
+        </select>
+
+        <label for="language">Favorite Language:</label>
+        <select class="list" name="language">
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="js">Java script</option>
+            <option value="python">Python</option>
+        </select>
+
+        <!-- <p>Gender:</p>        
+        <div class='gender'>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+        </div> -->
+
+        <p>Comment (optional): <input id="comment" type="text" name='comment'></p> 
+        <button type='submit'>Button</button>
+    </form>
+</body>
+</html>

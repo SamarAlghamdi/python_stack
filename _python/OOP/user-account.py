@@ -13,7 +13,7 @@ class User:
     def make_deposit(self, amount,account):
         account.deposit(amount)
 
-    def display_user_balance(self):
+    def display_user_balance(self, account):
         print(f"User: {self.name}: ")
         for x in range(len(self.account)):
             print(f"Balance of account{x+1}: {self.account[x].balance}")
@@ -30,9 +30,11 @@ person1.addAccount(acount1)
 person1.addAccount(acount2)
 
 person1.make_deposit(10000,acount1)
-person1.display_user_balance()
+person1.display_user_balance(acount1)
 person1.make_withdrawal(500,acount1)
-person1.display_user_balance()
+# person1.display_user_balance()
+
+
 # person2=User(name="Nora")
 # person2.make_deposit(1000,acount1)
 # person2.display_user_balance()

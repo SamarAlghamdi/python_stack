@@ -1,0 +1,37 @@
+{%extends 'base.html'%}{%load static%}{% load humanize %}{%block content %}
+
+<div class="p-4 p-md-5 mb-4 text-white rounded hero" style="background-image:url('{{cat.image.url}}')">
+    <div class="col-md-12 px-0">
+        <h1 class="display-4 fst-italic">{{cat.name}}</h1>
+    </div>
+</div>
+
+<div class="row">
+    {%for post in cat.posts_category.all%}
+    <div class="col-md-4 my-3">
+        <div class="card">
+            <a href="/post/{{post.id}}">
+                <img class="card-img-top" src="{{post.image.url}}" />
+                <div class="card-body">
+                    <h3 class="card-title">{{post.title}}</h3>
+                    <p class="card-text text-muted">{{post.description}}</p>
+                </div>
+            </a>
+            <div class="card-footer bg-white">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <a href="/user/{{post.created_by.id}}/profile">
+                            <img src="{{post.created_by.profile.image.url}}" class="profile" />
+                        </a>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted">{{post.created_by.username}}</p>
+                        <p class="text-muted date">{{post.created_at|naturaltime}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+{% endblock %}

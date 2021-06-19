@@ -1,0 +1,61 @@
+{%extends 'base.html'%} {%block content%} {%load static%}
+<form action="/new_post_form" method="POST" class="form" enctype="multipart/form-data">
+  {% csrf_token %}
+  <h1 class="text-center">Create Post</h1>
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Title</label>
+    <input type="text" class="form-control" name="title" placeholder="Enter Your Title" />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Description</label>
+    <input type="text" class="form-control" name="description" placeholder="Enter Your Description" />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Image</label>
+    <input type="file" class="form-control" name="my_file" />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Category</label>
+    <select name="category" class="form-control">
+      {%for c in category%}
+      <option value="{{c.id}}">{{c.name}}</option>
+      {%endfor%}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Content</label>
+    <textarea name="content" placeholder="Enter Your Content" id="content"></textarea>
+  </div>
+  <button type="submit" class="btn btn-outline-success btn-block mt-3">Create New Post</button>
+  <a href="/" class="btn btn-outline-primary btn-block mt-3"> Cancel </a>
+  <input type="hidden" value="{{user.id}}" name="user_id" />
+</form>
+
+<script src="{% static 'js/simplemde.min.js' %}"></script>
+<script>
+  var simplemde = new SimpleMDE();
+</script>
+{%endblock%}
+<!-- <script>
+  class="editable medium-editor-text-area"
+  var editor = new MediumEditor(".editable", {
+    toolbar: {
+      /* These are the default options for the toolbar,
+             if nothing is passed this is what is used */
+      allowMultiParagraphSelection: true,
+      buttons: ["bold", "italic", "underline", "anchor", "h2", "h3", "quote"],
+      diffLeft: 0,
+      diffTop: -10,
+      firstButtonClass: "medium-editor-button-first",
+      lastButtonClass: "medium-editor-button-last",
+      relativeContainer: null,
+      standardizeSelectionStart: false,
+      static: false,
+      /* options which only apply when static is true */
+      align: "center",
+      sticky: false,
+      updateOnEmptySelection: false,
+    },
+  });
+</script> -->

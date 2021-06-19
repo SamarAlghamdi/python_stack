@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .row{
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+        .column{
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+        .column2{
+            width: 100px;
+            height: 100px;
+            background-color: red;     
+        }
+
+    </style>
+</head>
+<body>
+    {%for x in range(row)%}
+    <div class="row">
+        {%if x%2==0%}
+        {%for y in range(column//2)%}
+        <div class="column"></div>
+        <div class="column2"></div>
+        {%endfor%}
+        {%else%}
+        {%for y in range(column//2)%}
+        <div class="column2"></div>
+        <div class="column"></div>
+        {%endfor%}
+        {%endif%} 
+    </div>
+    {%endfor%}
+
+</body>
+</html>
